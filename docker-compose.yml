@@ -7,18 +7,20 @@ services:
       - 5432:5432
     networks:
       - sportinj_db
+    volumes: 
+      - .data/postgres:/var/lib/postgresql/data
 
   backend:
     image: ghcr.io/sportinj/backend:v1.0.0
     env_file:
       - .env
     ports:
-      - 8080:8080
+      - 8080:80
     networks:
       - sportinj_db
       - sportinj_bot
 
-  bot:
+  chatbot:
     image: ghcr.io/sportinj/chatbot:v1.0.0
     env_file:
       - .env
